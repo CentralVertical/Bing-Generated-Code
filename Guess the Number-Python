@@ -1,0 +1,46 @@
+# Guess the Number game in Python
+import random
+
+# Generate a random number between 1 and 100
+secret = random.randint(1, 100)
+
+# Declare a variable to store the user's guess
+guess = None
+
+# Declare a variable to count the number of tries
+tries = 0
+
+# Print the welcome message
+print("Welcome to Guess the Number game!")
+print("I have chosen a number between 1 and 100.")
+print("You have 10 tries to guess it.")
+
+# Start the game loop
+while guess != secret:
+    # Prompt the user to enter a guess
+    guess = int(input("Enter your guess: "))
+
+    # Increment the number of tries
+    tries += 1
+
+    # Check if the user's guess is correct
+    if guess == secret:
+        # Print the congratulation message and break the loop
+        print(f"You got it! The number was {secret}.")
+        print(f"You guessed it in {tries} tries.")
+        break
+    # Check if the user's guess is too high
+    elif guess > secret:
+        # Print the hint message
+        print("Your guess is too high.")
+    # Check if the user's guess is too low
+    elif guess < secret:
+        # Print the hint message
+        print("Your guess is too low.")
+
+    # Check if the user has run out of tries
+    if tries == 10:
+        # Print the game over message and break the loop
+        print(f"Sorry, you ran out of tries.")
+        print(f"The number was {secret}.")
+        break
