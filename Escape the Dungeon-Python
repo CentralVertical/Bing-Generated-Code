@@ -1,0 +1,89 @@
+# Escape the Dungeon game in Python
+import random
+
+# Define the dungeon as a dictionary of rooms
+# Each room has a name, a description, and a list of exits
+# Each exit is a tuple of a direction and a destination room
+# Some rooms have an object or an enemy that the user can interact with
+dungeon = {
+    "entrance": {
+        "name": "Entrance",
+        "description": "You are at the entrance of a dark and gloomy dungeon. You see a door to the north.",
+        "exits": [("north", "hallway")],
+        "object": None,
+        "enemy": None
+    },
+    "hallway": {
+        "name": "Hallway",
+        "description": "You are in a long and narrow hallway. You see doors to the east and west, and a staircase to the north.",
+        "exits": [("east", "library"), ("west", "kitchen"), ("north", "tower")],
+        "object": None,
+        "enemy": None
+    },
+    "library": {
+        "name": "Library",
+        "description": "You are in a large and dusty library. You see shelves of books and a desk with a lamp.",
+        "exits": [("west", "hallway")],
+        "object": ("book", "You find a book titled 'The Secrets of the Dungeon'. You open it and read a page. It says: 'To escape the dungeon, you need to find the golden key and the silver key. The golden key is hidden in the kitchen, and the silver key is guarded by the dragon in the tower. The keys will unlock the door in the cellar.'"),
+        "enemy": None
+    },
+    "kitchen": {
+        "name": "Kitchen",
+        "description": "You are in a dirty and smelly kitchen. You see pots and pans and a fireplace.",
+        "exits": [("east", "hallway"), ("down", "cellar")],
+        "object": ("golden key", "You find a golden key hidden under a pot. You take it and put it in your inventory."),
+        "enemy": None
+    },
+    "cellar": {
+        "name": "Cellar",
+        "description": "You are in a dark and damp cellar. You see barrels and crates and a locked door to the south.",
+        "exits": [("up", "kitchen"), ("south", "exit")],
+        "object": None,
+        "enemy": None
+    },
+    "tower": {
+        "name": "Tower",
+        "description": "You are in a high and narrow tower. You see a window and a chest.",
+        "exits": [("south", "hallway")],
+        "object": ("silver key", "You find a silver key inside the chest. You take it and put it in your inventory."),
+        "enemy": ("dragon", "You see a fierce and fiery dragon. It roars and breathes fire at you.")
+    },
+    "exit": {
+        "name": "Exit",
+        "description": "You are at the exit of the dungeon. You see a bright and sunny sky.",
+        "exits": [],
+        "object": None,
+        "enemy": None
+    }
+}
+
+# Define the user as a dictionary of health and inventory
+# The user starts with 100 health and an empty inventory
+user = {
+    "health": 100,
+    "inventory": []
+}
+
+# Define a function to print the user's status
+def print_status():
+    print(f"Your health is {user['health']}.")
+    print(f"Your inventory is {user['inventory']}.")
+
+# Define a function to print the current room's information
+def print_room():
+    # Get the current room from the dungeon
+    room = dungeon[user["room"]]
+    # Print the room's name, description, and exits
+    print(f"You are in the {room['name']}.")
+    print(room["description"])
+    print("You see exits to the ", end="")
+    for exit in room["exits"]:
+        print(exit[0], end=" ")
+    print()
+
+# Define a function to move the user to a different room
+def move(direction):
+    # Get the current room from the dungeon
+    room = dungeon[user["room"]]
+    # Loop through the room's exits
+    for exit in room["
